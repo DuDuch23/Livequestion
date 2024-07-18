@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'base/base.scss';
+@import 'pages/accueil.scss';
+@import 'pages/auteurs.scss';
+@import 'pages/nouvelleQuestion.scss';
+@import 'pages/questions.scss';

@@ -13,6 +13,44 @@
         {% endblock %}
     </head>
     <body>
+        <header class="p-10 flex justify-between">
+            <a href="#" class="items-center flex livequestion">
+                Livequestion
+            </a>
+            <nav class="nav-list flex items-center w-3/5">
+                <ul class="flex">
+                    <li class="nav-item">
+                        <a href="#">
+                            Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            Les questions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            Les auteurs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            Nouvelle question
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user flex w-1/5">
+                <div class="img-user">
+                    <img style="width: 60px; height:60px;" src="{{ asset('media/logo_github.png') }}">
+                </div>
+                <div class="firstname-lastname">
+                    <p>Alexandre</p>
+                    <p>Duchemin</p>
+                </div>
+            </div>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
