@@ -24,6 +24,14 @@ class QuestionRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function getThreeLastQuestion(){
+        return $this->createQueryBuilder('t')
+        ->orderBy('t.id', 'DESC')
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult();
+    }
+
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */

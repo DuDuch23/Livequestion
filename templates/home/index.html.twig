@@ -3,29 +3,30 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="flex">
-    <p>réponses</p>
-    <p> - </p>
-    <p>Par </p>
-</div>
-
-<section class="last-question">
+<section class="last-question flex">
     {% for question in lastQuestion %}
-        <p>
-            {{ question.title }}
-        </p>
+    <p>img src="{{ question.image }}"</p>
+    <div>
+        <div class="flex">
+            <p>{{ question.category }}</p>
+            <p>Il y a {{ question.date|date('Y/M/D') }}</p>
+        </div>
+        <h1>{{ question.title }}</h1>
+        {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
+    </div>
     {% endfor %}
 </section>
 
-<section class="three-last-questions">
-    <div>
-        <p></p>
+<section class="container-three-last-questions">
+    <div class="flex justify-between">
+        <h1>Dernières questions</h1>
         <a href="#">Voir toutes les questions</a>
+    </div>
+    <div class="flex justify-between">
+        {% for question in threeLastQuestion %}
+            {% include "components/containerLittleQuestion.html.twig" %}
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

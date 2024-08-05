@@ -1,0 +1,9 @@
+<p>img src="{{ question.image }}"</p>
+<div>
+    <div class="flex">
+        <p>{{ question.category }}</p>
+        <p>Il y a {{ question.date|date('Y/M/D') }}</p>
+    </div>
+    <h1>{{ question.title }}</h1>
+    {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
+</div>

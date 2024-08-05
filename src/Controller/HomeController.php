@@ -20,10 +20,13 @@ class HomeController extends AbstractController
 
         $lastQuestion = $questionRepository->getLastQuestion();
 
+        $threeLastQuestion = $questionRepository->getThreeLastQuestion();
+
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
             'lastQuestion' => $lastQuestion,
+            'threeLastQuestion' => $threeLastQuestion,
         ]);
     }
 }
