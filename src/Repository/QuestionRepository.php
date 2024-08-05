@@ -16,6 +16,14 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
+    public function getLastQuestion(){
+        return $this->createQueryBuilder('q')
+        ->orderBy('q.id', 'DESC')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getResult();
+    }
+
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */

@@ -24,6 +24,7 @@
                             Accueil
                         </a>
                     </li>
+                    {% if app.user != false %}
                     <li class="nav-item">
                         <a href="#">
                             Les questions
@@ -39,6 +40,7 @@
                             Nouvelle question
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </nav>
             {% if app.user %}
