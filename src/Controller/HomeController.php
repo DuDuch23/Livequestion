@@ -9,8 +9,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/', name: 'home')]
+    public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
