@@ -15,27 +15,69 @@ class UserFixtures extends Fixture
     }
 
     public const USER = [
-        "Duduch" => [
+        [
             'username' => 'Duduch',
             'email' => 'alexduduch77@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
         ],
-        "PauPau" => [
+        [
             'username' => 'Paupau',
             'email' => 'pauline@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
         ],
-        "Theo" => [
-            'username' => 'Theo',
+        [
+            'username' => 'Le_chat_blanc',
             'email' => 'theo@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
         ],
-        "Evan" => [
-            'username' => 'Evan',
+        [
+            'username' => 'Aquila',
             'email' => 'evan@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Ekaiser',
+            'email' => 'florie@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Anyoubis',
+            'email' => 'brian@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Davsoquer',
+            'email' => 'david@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Furidax',
+            'email' => 'stan@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Teo',
+            'email' => 'teo@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Halandalous',
+            'email' => 'halan@gmail.com',
+            'role' => ["ROLE_USER"],
+            'password' => 'mushumonchat',
+        ],
+        [
+            'username' => 'Anubis',
+            'email' => 'florient@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
         ],
@@ -53,7 +95,7 @@ class UserFixtures extends Fixture
             
             $manager->persist($user);
 
-            $this->addReference($reference, $user);
+            $this->addReference($attributes['username'], $user);
             echo "Utilisateur créé : " . $reference . "\n"; // Vérifiez si les utilisateurs sont créés
         }
 
