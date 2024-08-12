@@ -29,17 +29,23 @@ class HomeController extends AbstractController
         $rankedUsers = [];
         $rank = 1;
         foreach($fiveBestUser as $user){
-            $user['rank'] = $rank++;
-            $rankedUsers[] = $user;
+            $userData = [
+                'username' => $user['username'],
+                'num_questions' => $user['num_questions'],
+                'rank' => $rank++,
+            ];
+            $rankedUsers[] = $userData;
         }
+
+        //dd($rankedUsers);
 
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
             'lastQuestion' => $lastQuestion,
             'threeLastQuestion' => $threeLastQuestion,
-            'fiveBestUser' => $fiveBestUser,
-            'rankedUser' => $rankedUsers,
+            'fiveBestUser' => $rankedUsers,
+            'rankedUsers' => $rankedUsers,
         ]);
     }
 }
