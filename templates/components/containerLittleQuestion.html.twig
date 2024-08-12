@@ -1,7 +1,7 @@
 <div>
     <div>
-        <p>img src="{{ question.image }}"</p>
-        <p>{{ question.category }}</p>
+        <img class="image_question rounded-2xl" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
+        <p>{{ question.thematicId.name }}</p>
     </div>
     <h1>{{ question.title }}</h1>
     {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}

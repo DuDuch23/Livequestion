@@ -37,8 +37,6 @@ class HomeController extends AbstractController
             $rankedUsers[] = $userData;
         }
 
-        //dd($rankedUsers);
-
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,

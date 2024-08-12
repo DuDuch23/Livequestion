@@ -3,42 +3,113 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
+    <header class="p-10 flex justify-between">
+        <a href="#" class="items-center flex livequestion">
+            Livequestion
+        </a>
+        <nav class="nav-list flex items-center w-3/5">
+            <ul class="flex">
+                <li class="nav-item">
+                    <a href="#">
+                        Accueil
+                    </a>
+                </li>
+                {% if app.user != false %}
+                <li class="nav-item">
+                    <a href="#">
+                        Les questions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        Les auteurs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        Nouvelle question
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('logout') }}">Logout</a>
+            </div>
+        {% else %}
+        <form action="{{ path('home') }}" method="post">
+            <div class="container-username grid">
+                <label for="username">Nom d'utilisateur</label>
+                <input class="text-black" type="text" value="{{ last_username }}" name="_username" id="username">
+            </div>
+            <div class="container-password grid">
+                <label for="password">Password</label>
+                <input class="text-black" type="password" name="_password" id="password">
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+    
+                <div class="checkbox mb-3">
+                    <input type="checkbox" name="_remember_me" id="_remember_me">
+                    <label for="_remember_me">Remember me</label>
+                </div>
+            #}
+    
+            <button class="btn btn-lg btn-primary" type="submit">
+                Sign in
+            </button>
+        </form>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+    </header>
+    <div class="m-12">
+        <section class="last-question flex">
+            {% for question in lastQuestion %}
+            <div>
+                <div class="flex">
+                    <img class="image_question rounded-2xl" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
+                    <div class="grid ml-12">
+                        <div class="flex gap-4 items-center">
+                            <p class="font-bold text-lg">{{ question.thematicId.name }}</p>
+                            <span>•</span>
+                            <p>Il y a {{ question.date|date('Y/M/D') }}</p>
+                        </div>
+                        <h1 class="font-semibold text-4xl">{{ question.title }}</h1>
+                        {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
 
-<section class="last-question flex">
-    {% for question in lastQuestion %}
-    <p>img src="{{ question.image }}"</p>
-    <div>
-        <div class="flex">
-            <p>{{ question.category }}</p>
-            <p>Il y a {{ question.date|date('Y/M/D') }}</p>
-        </div>
-        <h1>{{ question.title }}</h1>
-        {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
-    </div>
-    {% endfor %}
-</section>
+        <section class="container-three-last-questions">
+            <div class="flex justify-between">
+                <h1>Dernières questions</h1>
+                <a href="#">Voir toutes les questions</a>
+            </div>
+            <div class="flex justify-between">
+                {% for question in threeLastQuestion %}
+                    {% include "components/containerLittleQuestion.html.twig" %}
+                {% endfor %}
+            </div>
+        </section>
 
-<section class="container-three-last-questions">
-    <div class="flex justify-between">
-        <h1>Dernières questions</h1>
-        <a href="#">Voir toutes les questions</a>
+        <section class="container-best-author">
+            <div class="flex justify-between">
+                <h1>Meilleurs auteurs</h1>
+                <a href="#">Voir tous les auteurs</a>
+            </div>
+            <div class="flex justify-between">
+                {% for bestUser in fiveBestUser %}
+                    {% include "components/bestAuthor.html.twig" %}
+                {% endfor %}
+            </div>
+        </section>
     </div>
-    <div class="flex justify-between">
-        {% for question in threeLastQuestion %}
-            {% include "components/containerLittleQuestion.html.twig" %}
-        {% endfor %}
-    </div>
-</section>
-
-<section class="container-best-author">
-    <div class="flex justify-between">
-        <h1>Meilleurs auteurs</h1>
-        <a href="#">Voir tous les auteurs</a>
-    </div>
-    <div class="flex justify-between">
-        {% for bestUser in fiveBestUser %}
-            {% include "components/bestAuthor.html.twig" %}
-        {% endfor %}
-    </div>
-</section>
 {% endblock %}

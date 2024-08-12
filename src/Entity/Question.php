@@ -5,17 +5,16 @@ namespace App\Entity;
 use App\Repository\QuestionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
+#[Vich\Uploadable]
 class Question
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $category = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -26,28 +25,23 @@ class Question
     #[ORM\Column]
     private ?int $nb_answer = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    #[Vich\UploadableField(mapping: 'question_image', fileNameProperty: 'imageNameQuestion')]
+    private ?File $imageFileQuestion = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageNameQuestion = null;
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\ManyToOne(targetEntity: Thematic::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Thematic $thematic_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): static
-    {
-        $this->category = $category;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -102,17 +96,35 @@ class Question
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFileQuestion
+     */
 
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
+     public function setImageFileQuestion(?File $imageFileQuestion = null): void
+     {
+         $this->imageFileQuestion = $imageFileQuestion;
+     }
+ 
+     public function getImageFileQuestion(): ?File
+     {
+         return $this->imageFileQuestion;
+     }
+ 
+     public function setImageNameQuestion(?string $imageNameQuestion): void
+     {
+         $this->imageNameQuestion = $imageNameQuestion;
+     }
+ 
+     public function getImageNameQuestion(): ?string
+     {
+         return $this->imageNameQuestion;
+     }
 
     public function getAuthor(): ?User
     {
@@ -122,6 +134,18 @@ class Question
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getThematicId(): ?Thematic
+    {
+        return $this->thematic_id;
+    }
+
+    public function setThematicId(?Thematic $thematic_id): static
+    {
+        $this->thematic_id = $thematic_id;
 
         return $this;
     }

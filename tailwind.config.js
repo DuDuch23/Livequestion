@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./templates/**/*.html.twig'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'nb-answer-created-by': '#AD0569',
+      },
+    },
   },
   plugins: [],
 }

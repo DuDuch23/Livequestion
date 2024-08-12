@@ -1,5 +1,5 @@
-<div class="flex style="font-size: 26px;"">
-    <p>{{ question.nbAnswer }} réponse{% if question.nbAnswer > 1 %}s{% endif %}</p>
+<div class="flex text-nb-answer-created-by text-xl gap-1.5">
+    <p><span class="font-bold">{{ question.nbAnswer }}</span> réponse{% if question.nbAnswer > 1 %}s{% endif %}</p>
     <span> - </span>
     <p>Par {{ question.author.username }}</p>
 </div>
