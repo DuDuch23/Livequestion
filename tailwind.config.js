@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'nb-answer-created-by': '#AD0569',
+        'rose': '#AD0569',
+        'yellow': '#D4DB00',
+        'grey': '#4C4C4C',
       },
     },
   },

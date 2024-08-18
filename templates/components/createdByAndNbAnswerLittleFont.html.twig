@@ -1,5 +1,7 @@
-<div class="flex" style="font-size: 16px;">
-    <p>{{ question.nbAnswer }} réponse{% if question.nbAnswer > 1 %}s{% endif %}</p>
-    <span> - </span>
+<div class="flex text-rose" style="font-size: 16px;">
+    <p><span class="font-bold">{{ question.nbAnswer }}</span> réponse{% if question.nbAnswer > 1 %}s{% endif %}</p>
+    <span>&nbsp;-&nbsp;</span>
     <p>Par {{ question.author.username }}</p>
+    <span>&nbsp;-&nbsp;</span>
+    <p>Il y a {{ question.date|date('Y/M/D') }}</p>
 </div>

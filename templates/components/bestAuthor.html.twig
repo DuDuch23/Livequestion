@@ -1,7 +1,14 @@
 <div class="flex">
-    <span>{{ bestUser.rank }}</span>
+    <span class="text-6xl font-semibold text-rose mx-4">{{ bestUser.rank }}</span>
     <div class="username-nb-answer">
-        <p>{{ bestUser.username }}</p>
-        <span>{{ bestUser.num_questions }}</span><p>question{% if bestUser.num_questions > 1 %}s{% endif %}</p>
+        <p class="font-bold text-2xl">{{ bestUser.username }}</p>
+        <div class="flex items-center">
+            <span class="text-yellow font-bold text-lg">
+                {{ bestUser.num_questions }}&nbsp;
+            </span>
+            <p>
+                question{% if bestUser.num_questions > 1 %}s{% endif %}
+            </p>
+        </div>
     </div>
 </diV>
