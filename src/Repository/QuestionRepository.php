@@ -32,6 +32,26 @@ class QuestionRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function getThreeRandomQuestion()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = '
+            SELECT * 
+            FROM question 
+            ORDER BY RAND() 
+            LIMIT 3
+        ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(); // Utilisation de executeQuery pour DBAL 3.x
+        
+        return $resultSet->fetchAllAssociative(); // Pour DBAL 3.x
+        
+        // Si vous utilisez Doctrine DBAL 2.x, remplacez par :
+        // return $resultSet->fetchAll();
+    }
+
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */
