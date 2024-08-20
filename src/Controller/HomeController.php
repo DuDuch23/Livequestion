@@ -26,7 +26,7 @@ class HomeController extends AbstractController
 
         $fiveBestUser = $userRepository->getFiveBestUser();
 
-        // thematic aléatoire
+        $threeQuestionRandomSameThematic = $questionRepository->getThreeQuestionSameThematic();
 
         $threeRandomQuestion = $questionRepository->getThreeRandomQuestion();
 
@@ -48,7 +48,8 @@ class HomeController extends AbstractController
             'threeLastQuestion' => $threeLastQuestion,
             'fiveBestUser' => $rankedUsers,
             'rankedUsers' => $rankedUsers,
-            // thematic aléatoire
+            'threeQuestionRandomSameThematic' => $threeQuestionRandomSameThematic,
+            'threeRandomQuestion' => $threeRandomQuestion,
         ]);
     }
 }

@@ -32,8 +32,29 @@ class QuestionRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function getThreeRandomQuestion()
-    {
+    public function getThreeQuestionSameThematic(){
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * 
+            FROM question 
+            WHERE thematic_id_id = (
+                SELECT thematic_id_id
+                FROM question 
+                ORDER BY RAND() 
+                LIMIT 1
+            )
+            ORDER BY RAND() 
+            LIMIT 3;
+        ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(); // Utilisation de executeQuery pour DBAL 3.x
+        
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function getThreeRandomQuestion(){
         $conn = $this->getEntityManager()->getConnection();
         
         $sql = '
