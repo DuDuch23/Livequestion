@@ -54,23 +54,33 @@ class QuestionRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-    public function getThreeRandomQuestion(){
-        $conn = $this->getEntityManager()->getConnection();
+    public function getThreeRandomQuestion()
+    {
+        $questions = $this->createQueryBuilder('q')
+            ->getQuery()
+            ->getResult();
+
+        if (count($questions) <= 3) {
+            return $questions;
+        }
+
+        $randomKeys = array_rand($questions, 3);
         
-        $sql = '
-            SELECT * 
-            FROM question 
-            ORDER BY RAND() 
-            LIMIT 3
-        ';
-        
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(); // Utilisation de executeQuery pour DBAL 3.x
-        
-        return $resultSet->fetchAllAssociative(); // Pour DBAL 3.x
-        
-        // Si vous utilisez Doctrine DBAL 2.x, remplacez par :
-        // return $resultSet->fetchAll();
+        $threeRandomQuestion = [
+            $questions[$randomKeys[0]],
+            $questions[$randomKeys[1]],
+            $questions[$randomKeys[2]],
+        ];
+
+        // Ajouter les questions aux tableaux séparés
+        $bigRandomQuestion = [$threeRandomQuestion[0]];
+        $twoLittleRandomQuestion = [$threeRandomQuestion[1], $threeRandomQuestion[2]];
+
+        // Retourner les questions ou les utiliser comme nécessaire
+        return [
+            'bigRandomQuestion' => $bigRandomQuestion,
+            'twoLittleRandomQuestion' => $twoLittleRandomQuestion
+        ];
     }
 
     //    /**

@@ -122,10 +122,33 @@
     {#}Section Best Author{#}
 
 
+    {#}Section random question same thematic{#}
+    <section class="container-three-random-question-same-thematic">
+        <div class="flex justify-between mb-8">
+            <h1 class="font-semibold text-4xl">Dans la thématique </h1>
+            <a href="#" class="text-rose">Voir d’autres questions sur “Sport”</a>
+        </div>
+        <div>
+        </div>
+    </section>
+    {#}Section random question same thematic{#}
+
+
     {#}Section Random Question{#}
     <section class="container-three-random-question">
-        <h1 class="font-semibold text-4xl">Questions aléatoires</h1>
-
+        <h1 class="font-semibold text-4xl mb-8">Questions aléatoires</h1>
+        <div class="three-random-question flex gap-28">
+            <div class="big-question w-3/6">
+            {% for question in bigRandomQuestion %}
+                {% include "components/containerLittleQuestion.html.twig" %}
+            {% endfor %}
+            </div>
+            <div class="two-little-question w-3/12">
+            {% for question in twoLittleRandomQuestion %}
+                {% include "components/containerLittleQuestion.html.twig" %}
+            {% endfor %}
+            </div>
+        </div>
     </section>
     {#}Section Random Question{#}
     </div>

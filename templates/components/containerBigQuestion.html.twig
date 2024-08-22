@@ -1,9 +1,0 @@
-<img class="image_question" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
-<div>
-    <div class="flex">
-        <p>{{ question.thematicId.name }}</p>
-        <p>Il y a {{ question.date|date('Y/M/D') }}</p>
-    </div>
-    <h1>{{ question.title }}</h1>
-    {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
-</div>

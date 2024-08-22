@@ -27,8 +27,11 @@ class HomeController extends AbstractController
         $fiveBestUser = $userRepository->getFiveBestUser();
 
         $threeQuestionRandomSameThematic = $questionRepository->getThreeQuestionSameThematic();
-
+        
         $threeRandomQuestion = $questionRepository->getThreeRandomQuestion();
+
+        $bigRandomQuestion = $threeRandomQuestion['bigRandomQuestion'];
+        $twoLittleRandomQuestion = $threeRandomQuestion['twoLittleRandomQuestion'];
 
         $rankedUsers = [];
         $rank = 1;
@@ -41,6 +44,8 @@ class HomeController extends AbstractController
             $rankedUsers[] = $userData;
         }
 
+        //dd($threeLastQuestion, $threeRandomQuestion);
+
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
@@ -49,7 +54,8 @@ class HomeController extends AbstractController
             'fiveBestUser' => $rankedUsers,
             'rankedUsers' => $rankedUsers,
             'threeQuestionRandomSameThematic' => $threeQuestionRandomSameThematic,
-            'threeRandomQuestion' => $threeRandomQuestion,
+            'bigRandomQuestion' => $bigRandomQuestion,
+            'twoLittleRandomQuestion' => $twoLittleRandomQuestion,
         ]);
     }
 }
