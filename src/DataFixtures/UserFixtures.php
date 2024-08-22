@@ -96,7 +96,6 @@ class UserFixtures extends Fixture
             $manager->persist($user);
 
             $this->addReference($attributes['username'], $user);
-            echo "Utilisateur créé : " . $reference . "\n"; // Vérifiez si les utilisateurs sont créés
         }
 
         $manager->flush();
