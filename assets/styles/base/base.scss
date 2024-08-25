@@ -9,12 +9,20 @@ header{
     font-weight: 600;
     line-height: 60.14px;
     text-align: left;
+}
 
+.livequestion::after{
+    content: "";
+    width: 2px;
+    background-color: white;
+    height: 20px;
+    left: 60px;
+    position: relative;
+    top: -20px
 }
 
 .nav-item{
-    font-size: 18px;
-    padding: 20px;
+    font-size: 26px;
 }
 
 .image_last_question{
