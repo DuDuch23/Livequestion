@@ -3,5 +3,5 @@
     <span>&nbsp;-&nbsp;</span>
     <p>Par {{ question.author.username }}</p>
     <span>&nbsp;-&nbsp;</span>
-    <p>Il y a {{ question.date|date('Y/M/D') }}</p>
+    <p>Il y a {{ question.getTimeElapsed() }}</p>
 </div>

@@ -80,7 +80,7 @@
                     <div class="flex gap-4 items-center">
                         <p class="font-bold text-lg">{{ question.thematicId.name }}</p>
                         <span>•</span>
-                        <p>Il y a {{ question.date|date('Y/M/D') }}</p>
+                        <p>Il y a {{ question.getTimeElapsed() }}</p>
                     </div>
                     <h1 class="font-semibold text-4xl">{{ question.title }}</h1>
                     {% include "components/createdByAndNbAnswerBigFont.html.twig" %}
