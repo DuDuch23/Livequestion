@@ -1,0 +1,8 @@
+<h1 class="text-center text-rose font-semibold text-4xl">Livequestion</h1>
+<p class="text-center font-bold text-2xl">Echangez autour de vos thématiques préférées</p>
+<div class="flex justify-between container-thematic">
+    {% for thematic in thematics %}
+        <p>{{ thematic.name }}</p>
+    {% endfor %}
+</div>
+<p>@ 2024 - Projet étudiant BTS  / Licence - Contactez-nous</p>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\QuestionRepository;
 use App\Repository\UserRepository;
+use App\Repository\ThematicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
     public function index(AuthenticationUtils $authenticationUtils, QuestionRepository $questionRepository,
-    UserRepository $userRepository): Response
+    UserRepository $userRepository, ThematicRepository $thematicRepository): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -44,6 +45,8 @@ class HomeController extends AbstractController
             $rankedUsers[] = $userData;
         }
 
+        $thematics = $thematicRepository->findAll();
+
         //dd($threeLastQuestion, $threeRandomQuestion);
 
         return $this->render('home/index.html.twig', [
@@ -56,6 +59,7 @@ class HomeController extends AbstractController
             'threeQuestionRandomSameThematic' => $threeQuestionRandomSameThematic,
             'bigRandomQuestion' => $bigRandomQuestion,
             'twoLittleRandomQuestion' => $twoLittleRandomQuestion,
+            'thematics' => $thematics,
         ]);
     }
 }
