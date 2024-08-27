@@ -6,11 +6,13 @@
     {% include "components/header.html.twig" %}
 
     <div class="m-12">
-        <h1>Nouvelle question</h1>
+        <h1 class="font-semibold text-4xl">Nouvelle question</h1>
         <div>
             <p>Filtrer les résultats</p>
             <div class="new-question">
-
+                {{ form_start(form) }}
+                
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

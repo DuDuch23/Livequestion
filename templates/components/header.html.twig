@@ -5,7 +5,7 @@
     <nav class="nav-list flex items-center w-3/5">
         <ul class="flex">
             <li class="nav-item">
-                <a class=" p-5" href="#">
+                <a class=" p-5" href="{{ path('home') }}">
                     Accueil
                 </a>
             </li>
@@ -30,7 +30,7 @@
     </nav>
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('logout') }}">Logout</a>
+            {{ app.user.userIdentifier }}, <a href="{{ path('logout') }}">Logout</a>
         </div>
     {% else %}
     <form action="{{ path('home') }}" method="post">

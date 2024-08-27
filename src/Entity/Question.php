@@ -17,14 +17,14 @@ class Question
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column]
-    private ?int $nb_answer = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $nb_answer = 0;
 
     #[Vich\UploadableField(mapping: 'question_image', fileNameProperty: 'imageNameQuestion')]
     private ?File $imageFileQuestion = null;
@@ -32,7 +32,7 @@ class Question
     #[ORM\Column(nullable: true)]
     private ?string $imageNameQuestion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'questions')]
+    #[ORM\ManyToOne(inversedBy: 'questions', targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
@@ -112,7 +112,7 @@ class Question
         return $this->author;
     }
 
-    public function setAuthor(?User $author): static
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
