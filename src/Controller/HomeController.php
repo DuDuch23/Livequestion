@@ -17,11 +17,16 @@ class HomeController extends AbstractController
     public function index(AuthenticationUtils $authenticationUtils, QuestionRepository $questionRepository,
     UserRepository $userRepository, ThematicRepository $thematicRepository): Response
     {
+        // Login
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
         $lastQuestion = $questionRepository->getLastQuestion();
+
+        
+
+        // GetQuestions
 
         $threeLastQuestion = $questionRepository->getThreeLastQuestion();
 
@@ -46,8 +51,6 @@ class HomeController extends AbstractController
         }
 
         $thematics = $thematicRepository->findAll();
-
-        //dd($threeLastQuestion, $threeRandomQuestion);
 
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,

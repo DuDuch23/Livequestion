@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use DateTime;
+use Symfony\Component\HttpFoundation\File\File;
+
 // use Carbon\Carbon;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
