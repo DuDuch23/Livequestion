@@ -21,18 +21,17 @@ class HomeController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        $lastQuestion = $questionRepository->getLastQuestion();
-
         
-
+        
         // GetQuestions
+        $lastQuestion = $questionRepository->getLastQuestion();
 
         $threeLastQuestion = $questionRepository->getThreeLastQuestion();
 
         $fiveBestUser = $userRepository->getFiveBestUser();
 
-        $threeQuestionRandomSameThematic = $questionRepository->getThreeQuestionSameThematic();
+        $threeQuestionsWithThematicSport = $questionRepository->getThreeQuestionsWithThematicSport('Sport');
+        $thematicSport = $threeQuestionsWithThematicSport[0]->getThematicId();
         
         $threeRandomQuestion = $questionRepository->getThreeRandomQuestion();
 
@@ -52,6 +51,8 @@ class HomeController extends AbstractController
 
         $thematics = $thematicRepository->findAll();
 
+        //dd($threeQuestionsWithThematicSport, $thematicSport);
+
         return $this->render('home/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
@@ -59,7 +60,8 @@ class HomeController extends AbstractController
             'threeLastQuestion' => $threeLastQuestion,
             'fiveBestUser' => $rankedUsers,
             'rankedUsers' => $rankedUsers,
-            'threeQuestionRandomSameThematic' => $threeQuestionRandomSameThematic,
+            'threeQuestionsWithThematicSport' => $threeQuestionsWithThematicSport,
+            'thematicSport' => $thematicSport,
             'bigRandomQuestion' => $bigRandomQuestion,
             'twoLittleRandomQuestion' => $twoLittleRandomQuestion,
             'thematics' => $thematics,
