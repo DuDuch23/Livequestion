@@ -31,7 +31,7 @@ class NewQuestionController extends AbstractController
                 $entityManager->persist($question);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('new_question', [
+                return $this->redirectToRoute('home', [
                     'id' => $question->getId(),
                 ]);
             }
