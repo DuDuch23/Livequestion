@@ -87,25 +87,25 @@ class Question
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFileQuestion
      */
 
-     public function setImageFileQuestion(?File $imageFileQuestion = null): void
-     {
-         $this->imageFileQuestion = $imageFileQuestion;
-     }
- 
-     public function getImageFileQuestion(): ?File
-     {
-         return $this->imageFileQuestion;
-     }
- 
-     public function setImageNameQuestion(?string $imageNameQuestion): void
-     {
-         $this->imageNameQuestion = $imageNameQuestion;
-     }
- 
-     public function getImageNameQuestion(): ?string
-     {
-         return $this->imageNameQuestion;
-     }
+    public function setImageFileQuestion(?File $imageFileQuestion = null): void
+    {
+        $this->imageFileQuestion = $imageFileQuestion;
+    }
+
+    public function getImageFileQuestion(): ?File
+    {
+        return $this->imageFileQuestion;
+    }
+
+    public function setImageNameQuestion(?string $imageNameQuestion): void
+    {
+        $this->imageNameQuestion = $imageNameQuestion;
+    }
+
+    public function getImageNameQuestion(): ?string
+    {
+        return $this->imageNameQuestion;
+    }
 
     public function getAuthor(): ?User
     {

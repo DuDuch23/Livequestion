@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
@@ -23,6 +25,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[Vich\UploadableField(mapping: 'user_image', fileNameProperty: 'imageNameUser')]
+    private ?File $imageFileUser = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageNameUser = null;
 
     /**
      * @var list<string> The user roles
@@ -75,6 +83,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+        /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFileUser
+     */
+
+     public function setImageFileUser(?File $imageFileUser = null): void
+     {
+         $this->imageFileUser = $imageFileUser;
+     }
+ 
+     public function getImageFileQuestion(): ?File
+     {
+         return $this->imageFileUser;
+     }
+ 
+     public function setImageNameUser(?string $imageNameUser): void
+     {
+         $this->imageNameUser = $imageNameUser;
+     }
+ 
+     public function getImageNameQuestion(): ?string
+     {
+         return $this->imageNameUser;
+     }
 
     /**
      * A visual identifier that represents this user.
