@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Question;
+use App\Entity\Thematic;
+use App\Repository\Traits\PaginateTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,42 +18,34 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
+    use PaginateTrait;
+
     public function getLastQuestion(){
         return $this->createQueryBuilder('q')
-        ->orderBy('q.id', 'DESC')
-        ->setMaxResults(1)
-        ->getQuery()
-        ->getResult();
+            ->orderBy('q.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getThreeLastQuestion(){
         return $this->createQueryBuilder('t')
-        ->orderBy('t.id', 'DESC')
-        ->setMaxResults(3)
-        ->getQuery()
-        ->getResult();
+            ->orderBy('t.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
     }
 
-    public function getThreeQuestionSameThematic(){
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            SELECT * 
-            FROM question 
-            WHERE thematic_id_id = (
-                SELECT thematic_id_id
-                FROM question 
-                ORDER BY RAND() 
-                LIMIT 1
-            )
-            ORDER BY RAND() 
-            LIMIT 3;
-        ';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(); // Utilisation de executeQuery pour DBAL 3.x
-        
-        return $resultSet->fetchAllAssociative();
+    public function getThreeQuestionsWithThematicSport($thematicName)
+    {
+        return $this->createQueryBuilder('q')
+            ->join('q.thematic_id', 't')
+            ->where('t.name = :thematicName')
+            ->setParameter('thematicName', $thematicName)
+            ->orderBy('q.createdAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getThreeRandomQuestion()
@@ -81,6 +75,84 @@ class QuestionRepository extends ServiceEntityRepository
             'bigRandomQuestion' => $bigRandomQuestion,
             'twoLittleRandomQuestion' => $twoLittleRandomQuestion
         ];
+    }
+
+    public function searchQuestionByTitleAuthorThematic($title, $author, $thematicName, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.thematic_id = :thematicName')
+            ->andWhere('question.author = :authorName')
+            ->andWhere('question.title LIKE :title')
+            ->setParameter('thematicName', $thematicName)
+            ->setParameter('authorName', $author)
+            ->setParameter('title', '%'.$title.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByTitle($title, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.title = :title')
+            ->setParameter('title', $title)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByAuthor($author, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.author = :authorName')
+            ->setParameter('authorName', $author)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByThematic(Thematic $thematic, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.thematic_id = :thematicName')
+            ->setParameter('thematicName', $thematic)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByTitleAuthor($title, $author, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.title = :title')
+            ->andWhere('question.author = :authorName')
+            ->setParameter('title', $title)
+            ->setParameter('authorName', $author)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByTitleThematic($title, $thematic, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.title = :title')
+            ->andWhere('question.thematic_id = :thematicName')
+            ->setParameter('title', $title)
+            ->setParameter('thematicName', $thematic)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchQuestionByAuthorThematic($author, $thematic, $page, $itemsPerPage){
+        return $this->createQueryBuilder('question')
+            ->where('question.author = :authorName')
+            ->andWhere('question.thematic_id = :thematicName')
+            ->setParameter('authorName', $author)
+            ->setParameter('thematicName', $thematic)
+            ->setFirstResult(($page -1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

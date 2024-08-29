@@ -1,0 +1,14 @@
+<div class="question w-full">
+    <div class="flex">
+        <img class="image_last_question rounded-2xl w-3/5 max-w-72" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
+        <div class="grid ml-12">
+            <div class="flex gap-4 items-center">
+                <p class="font-bold text-base">{{ question.thematicId.name }}</p>
+                <span>•</span>
+                <p class="text-base">Il y a {{ question.getTimeElapsed() }}</p>
+            </div>
+            <h1 class="font-semibold text-lg">{{ question.title }}</h1>
+            {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}
+        </div>
+    </div>
+</div>
