@@ -32,7 +32,7 @@
         <section class="container-three-last-questions mb-16">
             <div class="flex justify-between mb-8">
                 <h1 class="font-semibold text-4xl">Dernières questions</h1>
-                <a href="#" class="text-rose">Voir toutes les questions</a>
+                <a href="{{ path('question') }}" class="text-rose">Voir toutes les questions</a>
             </div>
             <div class="flex justify-between gap-36">
                 {% for question in threeLastQuestion %}
@@ -62,13 +62,16 @@
         <section class="container-three-random-question-same-thematic">
             <div class="flex justify-between mb-8">
                 <h1 class="font-semibold text-4xl">Dans la thématique </h1>
-                <a href="#" class="text-rose">Voir d’autres questions sur “Sport”</a>
+                <a href="{{ path('question', {'thematicName': thematicSport.name}) }}" class="text-rose">Voir d’autres questions sur {{ thematicSport.name }}</a>
             </div>
-            <div>
+            <div class="flex justify-between gap-36">
+                {% for question in threeQuestionsWithThematicSport %}
+                    {% include "components/containerLittleQuestion.html.twig" %}
+                {% endfor %}
             </div>
         </section>
         {#}Section random question same thematic{#}
-
+        
 
         {#}Section Random Question{#}
         <section class="container-three-random-question mb-24">
