@@ -16,6 +16,24 @@ class ThematicRepository extends ServiceEntityRepository
         parent::__construct($registry, Thematic::class);
     }
 
+    public function getRandomThematic()
+    {
+        $thematic = $this->createQueryBuilder('t')
+            ->getQuery()
+            ->getResult();
+
+        if(count($thematic) < 1)
+        {
+            return null;
+        }
+
+        $randomKey = array_rand($thematic);
+
+        $randomThematic = $thematic[$randomKey];
+        
+        return $randomThematic;
+    }
+
     //    /**
     //     * @return Thematic[] Returns an array of Thematic objects
     //     */
