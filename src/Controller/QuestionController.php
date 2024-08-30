@@ -26,19 +26,8 @@ class QuestionController extends AbstractController
         $getTitle = $request->query->get('title');
         $getAuthorName = $request->query->get('authorName');
         $getThematicName = $request->query->get('thematicName');
-        $thematic = null;
 
         // Récupération des questions filtrées par thématique si le paramètre est présent
-        if($getThematicName)
-        {
-            $thematic = $thematicRepository->findOneBy(['name' => $getThematicName]);
-
-            if (!$thematic)
-            {
-                // Gérer le cas où la thématique n'existe pas
-                throw $this->createNotFoundException('Thématique non trouvée');
-            }
-        }
 
         // Tableaux des questions trouvées
         $questions = [];
@@ -79,7 +68,7 @@ class QuestionController extends AbstractController
             $totalQuestionFound = count($questions);
         } elseif ($getThematicName)
         {
-            $questions = $questionRepository->searchQuestionByThematic($thematic, $currentPage, $countPerPage);
+            $questions = $questionRepository->searchQuestionByThematic($getThematicName, $currentPage, $countPerPage);
             $totalQuestionFound = count($questions);
         }
          else{
@@ -95,12 +84,7 @@ class QuestionController extends AbstractController
             return $this->redirectToRoute('question', ['page' => 1]);
         }
 
-        if ($thematic) {
-            $questions = $questionRepository->searchQuestionByThematic($thematic, $currentPage, $countPerPage);
-            $totalQuestionFound = count($questions);
-        }
-
-        //dd($questions, $getThematicName);
+        //dd($getThematicName, $questions);
 
         return $this->render('question/index.html.twig', [
             'users' => $users,

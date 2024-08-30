@@ -406,7 +406,7 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
             $question->setTitle($attributes['title']);
             $question->setNbAnswer($attributes['nb_answer']);
             $question->setImageNameQuestion($attributes['image']);
-            $question->setDate(new \DateTime($attributes['date']));
+            $question->setCreatedAt(new \DateTime($attributes['date']));
 
             // Associer un utilisateur au hasard parmi ceux définis dans UserFixtures
             $randomUser = UserFixtures::USER[array_rand(UserFixtures::USER)];

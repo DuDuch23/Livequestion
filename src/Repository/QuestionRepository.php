@@ -109,7 +109,7 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function searchQuestionByThematic(Thematic $thematic, $page, $itemsPerPage){
+    public function searchQuestionByThematic($thematic, $page, $itemsPerPage){
         return $this->createQueryBuilder('question')
             ->where('question.thematic_id = :thematicName')
             ->setParameter('thematicName', $thematic)
