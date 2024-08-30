@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
+#[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -99,7 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
          $this->imageFileUser = $imageFileUser;
      }
  
-     public function getImageFileQuestion(): ?File
+     public function getImageFileUser(): ?File
      {
          return $this->imageFileUser;
      }
@@ -109,7 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
          $this->imageNameUser = $imageNameUser;
      }
  
-     public function getImageNameQuestion(): ?string
+     public function getImageNameUser(): ?string
      {
          return $this->imageNameUser;
      }

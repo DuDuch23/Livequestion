@@ -4,23 +4,23 @@
     </a>
     <nav class="nav-list flex items-center w-3/5">
         <ul class="flex">
-            <li class="nav-item">
+            <li class="nav-item text-xl">
                 <a class=" p-5" href="{{ path('home') }}">
                     Accueil
                 </a>
             </li>
             {% if app.user != false %}
-            <li class="nav-item">
+            <li class="nav-item text-xl">
                 <a class=" p-5" href="{{ path('question') }}">
                     Les questions
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-xl">
                 <a class=" p-5" href="{{ path('auteur') }}">
                     Les auteurs
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-xl">
                 <a class=" p-5" href="{{ path('new_question') }}">
                     Nouvelle question
                 </a>
@@ -29,10 +29,17 @@
         </ul>
     </nav>
     {% if app.user %}
-        <div class="mb-3">
-            {{ app.user.userIdentifier }}, <a href="{{ path('logout') }}">Logout</a>
+        <div class="flex items-center gap-3">
+            <img class="image_user w-16 h-16 rounded-full" src="{{ vich_uploader_asset(app.user, 'imageFileUser') }}">
+            <p class="font-semibold text-xl">{{ app.user.userIdentifier }}</p>
+        </div>
+        <div class="flex items-center">
+            <a class="w-6 h-6" href="{{ path('logout') }}">
+                <img src="{{ asset('media/deconnexion.png') }}">
+            </a>
         </div>
     {% else %}
+        
     <form action="{{ path('home') }}" method="post">
         <div class="container-username grid">
             <label for="username">Nom d'utilisateur</label>
