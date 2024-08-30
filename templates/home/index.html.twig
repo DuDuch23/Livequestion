@@ -11,7 +11,11 @@
             {% for question in lastQuestion %}
             <div class="w-full">
                 <div class="flex">
-                    <img class="image_last_question rounded-2xl w-1/3" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
+                    {% if question.imageNameQuestion == null %}
+                        <img class="image_question rounded-2xl w-full" src="{{ asset('media/image_question_default.jfif') }}">
+                    {% else %}
+                        <img class="image_question rounded-2xl w-full" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">        
+                    {% endif %}
                     <div>
                         <div class="grid ml-12 h-3/4 mt-4">
                             <div class="flex gap-4 items-center">

@@ -1,7 +1,12 @@
 <div class="w-full grid gap-3">
     <div class="flex">
-        <img class="image_question rounded-2xl w-full" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">
-        <p class="thematic_name">{{ question.thematicId.name }}</p>
+        {% if question.imageNameQuestion == null %}
+            <img class="image_question rounded-2xl w-full" src="{{ asset('media/image_question_default.jfif') }}">
+        {% else %}
+            <img class="image_question rounded-2xl w-full" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">        
+        {% endif %}
+        
+        <p class="thematic_name px-1.5 rounded-full">{{ question.thematicId.name }}</p>
     </div>
     <h1 class="font-semibold text-grey text-xl">{{ question.title }}</h1>
     {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}

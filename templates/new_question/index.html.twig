@@ -6,11 +6,13 @@
     {% include "components/header.html.twig" %}
 
     <div class="m-12">
-        <h1 class="font-semibold text-4xl">Nouvelle question</h1>
-        <div>
+        <h1 class="font-semibold text-4xl mb-12">Nouvelle question</h1>
+        <div class="p-5 rounded-lg border-2 mb-28">
             <div class="new-question">
                 {{ form_start(form) }}
-                
+                {{ form_row(form.title) }}
+                {{ form_row(form.imageFileQuestion) }}
+                {{ form_row(form.thematic_id) }}
                 {{ form_end(form) }}
             </div>
         </div>

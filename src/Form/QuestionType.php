@@ -21,29 +21,42 @@ class QuestionType extends AbstractType
             ->add('title', TextType::class, [
                 'label'=> 'Titre',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-2 rounded-lg py-2.5 px-3.5',
                     'id' => 'titre',
+                ],
+                'row_attr' => [
+                    'class' => 'form-row grid mb-8',
                 ],
                 'required' => true,
             ])
             ->add('imageFileQuestion', VichImageType::class,[
                 'label'=> 'Image',
                 'attr' => [
-                    'class'=> 'form-control',
+                    'class'=> 'form-control border-2 rounded-lg py-2.5 px-3.5',
                 ],  
+                'row_attr' => [
+                    'class' => 'form-row grid mb-8',
+                ],
+                'required' => false,
             ])
             ->add('thematic_id', EntityType::class, [
                 'class' => Thematic::class,
                 'choice_label' => 'name',
                 'label' => 'Thématique :',
+                'attr' => [
+                    'class'=> 'form-control border-2 rounded-lg py-2.5 px-3.5',
+                ],
+                'row_attr' => [
+                    'class' => 'form-row grid mb-8',
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn',
+                    'class' => 'btn form-control border-2 rounded-lg py-2.5 px-3.5',
                 ],
                 'label' => 'Envoyer',
                 'row_attr' => [
-                    'class' => 'form-submit',
+                    'class' => 'form-submit grid',
                 ],
             ]);
         ;
