@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -43,9 +45,16 @@ class Question
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
+    /**
+     * @var Collection<int, Reponse>
+     */
+    #[ORM\OneToMany(targetEntity: Reponse::class, mappedBy: 'question')]
+    private Collection $reponse;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->reponse = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,4 +187,34 @@ class Question
     // {
     //     return Carbon::instance($this->createdAt)->diffForHumans();
     // }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponse(): Collection
+    {
+        return $this->reponse;
+    }
+
+    public function addReponse(Reponse $reponse): static
+    {
+        if (!$this->reponse->contains($reponse)) {
+            $this->reponse->add($reponse);
+            $reponse->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): static
+    {
+        if ($this->reponse->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getQuestion() === $this) {
+                $reponse->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
 }
