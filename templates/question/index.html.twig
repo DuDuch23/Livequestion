@@ -49,7 +49,7 @@
                 </div>
             </form>
         </div>
-        <div class="container-question grid gap-16">
+        <div class="container-question grid gap-16 mb-24">
             {% if totalQuestionFound == 0 %}
                 <p>Aucune question trouvée.</p>
             {% elseif questions is defined %}
@@ -58,14 +58,15 @@
                 {% endfor %}
             {% endif %}
         </div>
-    </div>
-    {% if questions is not empty %}
-        {% if questions is defined %}
-            {% include "components/pagination.html.twig" with {
-                route: 'question',
-                currentPage,
-                countPages
-            } only %}
+        {% if questions is not empty %}
+            {% if questions is defined %}
+                {% include "components/pagination.html.twig" with {
+                    route: 'question',
+                    currentPage,
+                    countPages
+                } only %}
+            {% endif %}
         {% endif %}
-    {% endif %}
+        {% include "components/footer.html.twig" %}
+    </div>
 {% endblock %}
