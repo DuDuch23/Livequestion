@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Form\QuestionType;
+use App\Repository\ThematicRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
@@ -16,8 +17,10 @@ class NewQuestionController extends AbstractController
 {
     #[Route('/new/question', name: 'new_question')]
     #[IsGranted('ROLE_USER')]
-    public function index(Request $request, EntityManagerInterface $entityManager, SecurityBundleSecurity $security): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, SecurityBundleSecurity $security, ThematicRepository $thematicRepository): Response
     {
+        $thematics = $thematicRepository->findAll();
+
         $question = new Question();
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
@@ -42,6 +45,7 @@ class NewQuestionController extends AbstractController
 
         return $this->render('new_question/index.html.twig', [
             'form' => $form,
+            'thematics'=> $thematics
         ]);
     }
 }
