@@ -6,42 +6,44 @@
     {% include "components/header.html.twig" %}
 
     <div class="m-12">
-        <h1 class="font-semibold text-4xl">Les questions</h1>
-        <p>Filtrer les résultats</p>
-        <div class="filtre">
-            <form action="{{ path('question') }}" method="get" class="mb-14 ">
-                <div class="input-group content-rechercher xl:flex md:justify-between mb-14 md:grid md:grid-cols-repeat-2">
-                    <div class="info-search w-full">
-                        <div class="info-search w-full">
-                            <span>
-                                Titre de la question
-                            </span>
-                            <input type="text" name="title">
-                        </div>
-                        <span>
-                            Auteur :
+        <h1 class="font-semibold text-5xl mb-12">Les questions</h1>
+        <p class="text-xl font-bold text-grey-black mb-3">Filtrer les résultats</p>
+        <div class="filtre p-5 rounded-lg border-2 mb-28">
+            <form action="{{ path('question') }}" method="get" class="">
+                <div class="input-group content-rechercher">
+                    <div class="info-search w-full grid mb-3">
+                        <span class="mb-2 font-semibold text-lg">
+                            Titre de la question
                         </span>
-                        <select name="authorName">
-                            <option></option>
-                            {% for user in users %}
-                                <option value="{{ user.id }}">{{ user.username }}</option>
-                            {% endfor %}
-                        </select>
+                        <input class="border-2 rounded-lg py-2.5 px-3.5" type="text" name="title">
                     </div>
-                    <div class="info-search w-full">
-                        <span>
-                            Catégorie :
-                        </span>
-                        <select name="thematicName">
-                            <option></option>
-                            {% for thematic in thematics %}
-                                <option value="{{ thematic.id }}">{{ thematic.name }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="info-search w-full sm:flex gap-5">
+                        <div class="author w-full grid sm:w-3/6">
+                            <span class="mb-2 font-semibold text-lg">
+                                Auteur :
+                            </span>
+                            <select class="border-2 rounded-lg py-2.5 px-3.5" name="authorName">
+                                <option>Sélectionner un auteur</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}">{{ user.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="thematic w-full grid sm:w-3/6">
+                            <span class="mb-2 font-semibold text-lg">
+                                Catégorie :
+                            </span>
+                            <select class="border-2 rounded-lg py-2.5 px-3.5" name="thematicName">
+                                <option>Sélectionner une catégorie</option>
+                                {% for thematic in thematics %}
+                                    <option value="{{ thematic.id }}">{{ thematic.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div class="flex items-end justify-center">
                         <button class="btn" type="submit">
-                            Rechercher
+                            rechercher
                         </button>
                     </div>
                 </div>

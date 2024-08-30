@@ -7,6 +7,7 @@ module.exports = {
         'rose': '#AD0569',
         'yellow': '#D4DB00',
         'grey': '#4C4C4C',
+        'grey-black': '#101828',
       },
     },
   },
