@@ -19,6 +19,9 @@ Installation :
 https://github.com/DuDuch23/Livequestion.git
 - Installez les dépendances :
 composer install
+npm install
+npm run build
+(facultatif) npm run watch
 - Créez et configurez la base de données
 Copiez le fichier .env et modifiez les paramètres de la base de données :
 Modifiez .env.local pour configurer vos informations de base de données :
@@ -27,7 +30,7 @@ DATABASE_URL="mysql://root@127.0.0.1:3306/livequestion?serverVersion=10.4.32-Mar
 Créez la base de données et les tables :
 
 - php bin/console doctrine:database:create
-- php bin/console doctrine:make:migration
+- php bin/console make:migration
 - php bin/console doctrine:migrations:migrate
 
 Charger les données de base (facultatif)
