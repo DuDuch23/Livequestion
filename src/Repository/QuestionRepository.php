@@ -155,6 +155,16 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findQuestionsByUser($userId): array
+    {
+        return $this->createQueryBuilder('q')
+            ->where('q.author = :author')
+            ->setParameter('author', $userId)
+            ->orderBy('q.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */

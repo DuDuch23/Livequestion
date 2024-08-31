@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\QuestionRepository;
 use App\Repository\ThematicRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,13 +26,39 @@ class AuteurController extends AbstractController
         ]);
     }
 
-    #[Route('/auteur/profil/{id}', name: 'profil_auteur')]
-    public function afficherProfil($id, UserRepository $userRepository): Response
+    #[Route('/auteur/profil/{username}', name: 'profil_auteur')]
+    public function afficherProfil($username, UserRepository $userRepository, QuestionRepository $questionRepository): Response
     {
-        $user = $userRepository->find($id);
+        $user = $userRepository->findOneBy(['username' => $username]);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé');
+        }
+
+        $questions = $questionRepository->findQuestionsByUser($user->getId());
+
+        //dd($user);
 
         return $this->render('auteur/profil.html.twig', [
-            'user'=> $user,
+            'user' => $user,
+            'questions' => $questions,
+        ]);
+    }
+
+    #[Route('/auteur/monprofil/{username}', name: 'mon_profil_auteur')]
+    public function afficherMonProfil($username, UserRepository $userRepository, QuestionRepository $questionRepository): Response
+    {
+        $user = $userRepository->findOneBy(['username'=> $username]);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé');
+        }
+
+        $questions = $questionRepository->findQuestionsByUser($user->getId());
+
+        return $this->render('auteur/profil.html.twig', [
+            'user' => $user,
+            'questions' => $questions,
         ]);
     }
 }

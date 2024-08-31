@@ -20,66 +20,77 @@ class UserFixtures extends Fixture
             'email' => 'alexduduch77@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_duduch.jpg',
         ],
         [
             'username' => 'Paupau',
             'email' => 'pauline@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_paupau.jpg',
         ],
         [
             'username' => 'Le_chat_blanc',
             'email' => 'theo@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_theo.jpg',
         ],
         [
             'username' => 'Aquila',
             'email' => 'evan@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_evan.jpg',
         ],
         [
             'username' => 'Ekaiser',
             'email' => 'florie@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_florie.jpg',
         ],
         [
             'username' => 'Anyoubis',
             'email' => 'brian@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_brian.jpg',
         ],
         [
             'username' => 'Davsoquer',
             'email' => 'david@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_david.jpg',
         ],
         [
             'username' => 'Furidax',
             'email' => 'stan@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_stan.jpg',
         ],
         [
             'username' => 'Teo',
             'email' => 'teo@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_teo.jpg',
         ],
         [
             'username' => 'Halandalous',
             'email' => 'halan@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_halan.jpg',
         ],
         [
             'username' => 'Anubis',
             'email' => 'florient@gmail.com',
             'role' => ["ROLE_USER"],
             'password' => 'mushumonchat',
+            'imageNameUser' => 'pdp_florient.jpg',
         ],
     ];
 
@@ -92,6 +103,7 @@ class UserFixtures extends Fixture
             $user->setEmail($attributes['email']);
             $user->setRoles($attributes['role']);
             $user->setPassword($this->passwordHasher->hashPassword($user, $attributes['password']));
+            $user->setImageNameUser($attributes['imageNameUser']);
             
             $manager->persist($user);
 

@@ -80,11 +80,11 @@ class QuestionController extends AbstractController
         $countPages = ceil($countQuestion / $countPerPage);
         $activatePaginate = true;
 
-        if ($currentPage > $countPages && $totalQuestionFound > 0) {
+        if ($currentPage > $countPages || $currentPage <= 0) {
             return $this->redirectToRoute('question', ['page' => 1]);
         }
 
-        //dd($getThematicName, $questions);
+        //dd($currentPage, $countPages, $totalQuestionFound);
 
         return $this->render('question/index.html.twig', [
             'users' => $users,
