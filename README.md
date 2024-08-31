@@ -16,7 +16,7 @@ Avant de commencer, assurez-vous que vous avez installé les éléments suivants
 Installation :
 
 - Clonez le dépôt :
-git clone https://github.com/username/nom-du-projet.git
+https://github.com/DuDuch23/Livequestion.git
 - Installez les dépendances :
 composer install
 - Créez et configurez la base de données
