@@ -9,6 +9,10 @@ module.exports = {
         'grey': '#4C4C4C',
         'grey-black': '#101828',
       },
+      fontFamily: {
+        'playfair': ["PlayFair Display"],
+        'sourceserif': ["Source Serif 4"],
+      },
     },
   },
   plugins: [],

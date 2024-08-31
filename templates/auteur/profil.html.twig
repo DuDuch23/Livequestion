@@ -9,17 +9,24 @@
             <div class="grid">
                 <div class="flex justify-center items-center">
                     {% if user.imageNameUser == null %}
-                        <img class="image_user_profil w-80 h-80 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                        <img class="image_user_profil w-40 h-40 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
                     {% else %}
-                        <img class="image_user_profil w-80 h-80 rounded-full" src="{{ vich_uploader_asset(user, 'imageFileUser') }}">        
+                        <img class="image_user_profil w-40 h-40 rounded-full" src="{{ vich_uploader_asset(user, 'imageFileUser') }}">        
                     {% endif %}
                 </div>
-                <h1 class="font-semibold text-4xl mb-12">{{ user.username }}</h1>
+                <h1 class="font-semibold text-4xl mb-4 mt-4 text-center">{{ user.username }}</h1>
             </div>
         </div>
         <div class="">
             <p>Nombres de question publiée :</p>
             <p>Rang de l'utilisateur :</p>
         </div>
+        <ul class="gap-16 grid grid-cols-2">
+            {% for question in questions %}
+                {% include "components/question.html.twig" %}
+            {% else %}
+                <li>Aucune question trouvée.</li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 <header class="p-10 flex justify-between">
-    <a href="#" class="items-center flex livequestion">
+    <a href="#" class="font-['playfair'] items-center flex livequestion">
         Livequestion
     </a>
     <nav class="nav-list flex items-center w-3/5">
@@ -29,9 +29,11 @@
         </ul>
     </nav>
     {% if app.user %}
-        <div class="flex items-center gap-3">
-            <img class="image_user w-16 h-16 rounded-full" src="{{ vich_uploader_asset(app.user, 'imageFileUser') }}">
-            <p class="font-semibold text-xl">{{ app.user.userIdentifier }}</p>
+        <div class="flex items-center">
+            <a href="{{ path('mon_profil_auteur', { 'username' : app.user.username }) }}" class="flex items-center gap-4">
+                <img class="image_user w-16 h-16 rounded-full" src="{{ vich_uploader_asset(app.user, 'imageFileUser') }}">
+                <p class="font-semibold text-xl">{{ app.user.userIdentifier }}</p>
+            </a>
         </div>
         <div class="flex items-center">
             <a class="w-6 h-6" href="{{ path('logout') }}">
