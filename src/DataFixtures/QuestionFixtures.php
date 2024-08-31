@@ -181,13 +181,6 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
 
         // Politique
         [
-            'title' => 'Pourquoi Evan est un énorme pd ?',
-            'nb_answer' => 678,
-            'image' => 'image_question.png',
-            'date' => '2023-07-01 12:00:00',
-            'thematic' => ThematicFixtures::POLITIQUE,
-        ],
-        [
             'title' => 'Comment les réseaux sociaux influencent-ils les élections ?',
             'nb_answer' => 85,
             'image' => 'image_question.png',
