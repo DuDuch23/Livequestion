@@ -23,7 +23,7 @@
                                 Auteur :
                             </span>
                             <select class="border-2 rounded-lg py-2.5 px-3.5" name="authorName">
-                                <option>Sélectionner un auteur</option>
+                                <option value="" disabled selected>Sélectionner un auteur</option>
                                 {% for user in users %}
                                     <option value="{{ user.id }}">{{ user.username }}</option>
                                 {% endfor %}
@@ -34,7 +34,7 @@
                                 Catégorie :
                             </span>
                             <select class="border-2 rounded-lg py-2.5 px-3.5" name="thematicName">
-                                <option>Sélectionner une catégorie</option>
+                                <option value="" disabled selected>Sélectionner une catégorie</option>
                                 {% for thematic in thematics %}
                                     <option value="{{ thematic.id }}">{{ thematic.name }}</option>
                                 {% endfor %}

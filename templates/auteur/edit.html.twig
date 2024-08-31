@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livequestion - Modifier la question{% endblock %}
+
+{% block body %}
+    {% include "components/header.html.twig" %}
+    <div class="m-12">
+        <h1>Modifier la question</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+        {% include "components/footer.html.twig" %}
+    </div>
+{% endblock %}

@@ -33,7 +33,7 @@ class QuestionController extends AbstractController
         $questions = [];
 
         // pagination
-        $countPerPage = 5;
+        $countPerPage = 10;
         $currentPage = $request->query->getInt('page', 1);
 
         // Nombres de questions trouvées

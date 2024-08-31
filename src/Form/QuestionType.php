@@ -10,7 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class QuestionType extends AbstractType
@@ -28,6 +29,14 @@ class QuestionType extends AbstractType
                     'class' => 'form-row grid mb-8',
                 ],
                 'required' => true,
+                'constraints' => [
+                    new Length([
+                        'min' => 10,
+                        'max' => 255,
+                        'minMessage' => 'Le titre doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.',
+                    ]),
+                ],
             ])
             ->add('imageFileQuestion', VichImageType::class,[
                 'label'=> 'Image',

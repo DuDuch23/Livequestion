@@ -77,6 +77,14 @@ class QuestionRepository extends ServiceEntityRepository
         ];
     }
 
+    public function getQuestionByDescCreatedAt()
+    {
+        return $this->createQueryBuilder('q')
+            ->orderBy('q.createdAt','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function searchQuestionByTitleAuthorThematic($title, $author, $thematicName, $page, $itemsPerPage){
         return $this->createQueryBuilder('question')
             ->where('question.thematic_id = :thematicName')

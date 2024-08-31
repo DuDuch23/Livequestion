@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livequestion - Inscription{% endblock %}
+
+{% block body %}
+    {% include "components/header.html.twig" %}
+
+    <div class="m-12">
+        <div class="flex justify-center items-center">
+            <div class="border-2 w-3/6 p-6">
+            <h1 class="text-center mb-6">S'inscrire</h1>
+            {{ form_start(form) }}
+                <div>
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                </div>
+                <div>
+                    {{ form_row(form.imageFileUser) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
