@@ -9,7 +9,7 @@
         {#}Section Last Question{#}
         <section class="last-question flex mb-24 w-full">
             {% for question in lastQuestion %}
-            <div class="w-full">
+            <div class="w-full question">
                 <div class="grid lg:flex">
                     {% if question.imageNameQuestion == null %}
                         <img class="image_question rounded-2xl w-full shadow-md" src="{{ asset('media/image_question_default.jfif') }}">

@@ -5,9 +5,9 @@
 {% block body %}
     {% include "components/header.html.twig" %}
     <div class="m-12">
-        <div class="flex justify-around mb-28">
+        <div class="container-profil flex justify-around mb-28">
             <div class="grid justify-center items-center">
-                <p>Nombres de question publiée :</p>
+                <p>Nombres de question publiée : {{ countQuestion }}</p>
                 <p>Rang de l'utilisateur :</p>
             </div>
             <div class="grid">
@@ -21,14 +21,9 @@
                 <h1 class="font-semibold text-4xl mb-4 mt-4 text-center">{{ user.username }}</h1>
             </div>
         </div>
-        <ul class="gap-16 grid grid-cols-2">
+        <ul class="gap-16 grid">
             {% for question in questions %}
                 {% include "components/question.html.twig" %}
-                <form action="{{ path('modifier_ma_question', {id: question.id}) }}" method="get">
-                    <button type="submit">
-                        <span>Modifier</span>
-                    </button>
-                </form>
             {% else %}
                 <li>Aucune question trouvée.</li>
             {% endfor %}
