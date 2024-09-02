@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class QuestionController extends AbstractController
 {
     #[Route('/question', name: 'question', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(QuestionRepository $questionRepository, UserRepository $userRepository,
     ThematicRepository $thematicRepository, Request $request): Response
     {

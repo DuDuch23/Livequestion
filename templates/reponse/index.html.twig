@@ -17,7 +17,7 @@
         <div class="container_reponse grid gap-10">
             {% for reponse in responses %}
             {% if reponse.user.id == app.user.id %}
-            <div class="flex border-2 justify-end">
+            <div class="flex border-2 justify-end reponse">
                 <div class="grid">
                     <p>
                     {{ reponse.user.username }}
@@ -27,18 +27,26 @@
                     </p>
                 </div>
                 {% if reponse.user.imageNameUser is null %}
-                    <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                <div class="pt-1 pr-5 pb-1 pl-5">
+                    <img class="shadow-xl image_user_profil w-16 h-16 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                </div>
                 {% else %}
-                    <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                <div class="pt-1 pr-5 pb-1 pl-5">
+                    <img class="shadow-xl image_user_profil w-16 h-16 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                </div>
                 {% endif %}
             </div>
             {% else %}
-            <div class="flex border-2 justify-start">
+            <div class="flex border-2 justify-start reponse">
                 <div class=" flex">
                     {% if reponse.user.imageNameUser is null %}
-                        <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                    <div class="pt-1 pr-5 pb-1 pl-5">
+                        <img class="shadow-xl image_user_profil w-16 h-16 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                    </div>
                     {% else %}
-                        <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                    <div class="pt-1 pr-5 pb-1 pl-5">
+                        <img class="shadow-xl image_user_profil w-16 h-16 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                    </div>
                     {% endif %}
                 </div>
                 <div class="grid">

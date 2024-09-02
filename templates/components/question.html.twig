@@ -1,4 +1,4 @@
-<div class="question w-full">
+<div class="question w-full flex">
     <a href="{{ path('reponse', {id: question.id}) }}" method="get">
         <div class="flex">
             {% if question.imageNameQuestion == null %}
@@ -15,13 +15,13 @@
                 <h1 class="font-semibold text-lg">{{ question.title }}</h1>
                 {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}
             </div>
-            {% if app.request.attributes.get('_route') == 'mon_profil' %}
-            <form action="{{ path('modifier_ma_question', {id: question.id}) }}" method="get">
-                <button type="submit">
-                    <span>Modifier</span>
-                </button>
-            </form>
-            {% endif %}
         </div>
     </a>
+    {% if app.request.attributes.get('_route') == 'mon_profil' %}
+    <form action="{{ path('modifier_ma_question', {id: question.id}) }}" method="get">
+        <button type="submit">
+            <span>Modifier</span>
+        </button>
+    </form>
+    {% endif %}
 </div>
