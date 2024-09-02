@@ -97,7 +97,8 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function searchQuestionByTitle($title, $page, $itemsPerPage){
+    public function searchQuestionByTitle(string $title, int $page, $itemsPerPage): array
+    {
         return $this->createQueryBuilder('question')
             ->where('question.title = :title')
             ->setParameter('title', $title)

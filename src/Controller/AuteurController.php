@@ -97,11 +97,13 @@ class AuteurController extends AbstractController
         }
 
         $questions = $questionRepository->findQuestionsByUser($user->getId());
-
+        $countquestion = count($questions);
+        //dd($countquestion);
         return $this->render('auteur/profil.html.twig', [
             'user' => $user,
             'questions' => $questions,
             'thematics' => $thematics,
+            'countQuestion' => $countquestion,
         ]);
     }
 

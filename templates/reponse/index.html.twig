@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livequestion - {{question.title}}{% endblock %}
+
+{% block body %}
+    {% include "components/header.html.twig" %}
+
+    <div class="m-12">
+        <h1 class="font-semibold text-4xl mb-12"></h1>
+        <div class="p-5 rounded-lg border-2 mb-28">
+            <div class="new-question">
+                {{ form_start(form) }}
+                {{ form_row(form.message) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="container_reponse grid gap-10">
+            {% for reponse in responses %}
+            {% if reponse.user.id == app.user.id %}
+            <div class="flex border-2 justify-end">
+                <div class="grid">
+                    <p>
+                    {{ reponse.user.username }}
+                    </p>
+                    <p>
+                    {{ reponse.message }}
+                    </p>
+                </div>
+                {% if reponse.user.imageNameUser is null %}
+                    <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                {% else %}
+                    <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="flex border-2 justify-start">
+                <div class=" flex">
+                    {% if reponse.user.imageNameUser is null %}
+                        <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ asset('media/pdp_default.jpg') }}">
+                    {% else %}
+                        <img class="shadow-xl image_user_profil w-20 h-20 rounded-full" src="{{ vich_uploader_asset(reponse.user, 'imageFileUser') }}">
+                    {% endif %}
+                </div>
+                <div class="grid">
+                    <p class="flex items-baseline">
+                    {{ reponse.user.username }}
+                    </p>
+                    <p class="flex items-end">
+                    {{ reponse.message }}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        {% include "components/footer.html.twig" %}
+    </div>
+{% endblock %}

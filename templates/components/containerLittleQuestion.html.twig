@@ -1,13 +1,15 @@
 <div class="w-full grid gap-3 question">
-    <div class="flex">
-        {% if question.imageNameQuestion == null %}
-            <img class="image_question rounded-2xl w-full" src="{{ asset('media/image_question_default.jfif') }}">
-        {% else %}
-            <img class="image_question rounded-2xl w-full" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">        
-        {% endif %}
-        
-        <p class="thematic_name px-1.5 rounded-full">{{ question.thematicId.name }}</p>
-    </div>
-    <h1 class="font-['sourceserif'] font-semibold text-grey text-xl">{{ question.title }}</h1>
-    {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}
+    <a href="{{ path('reponse', {id: question.id}) }}" method="get">
+        <div class="flex">
+            {% if question.imageNameQuestion == null %}
+                <img class="image_question rounded-2xl w-full" src="{{ asset('media/image_question_default.jfif') }}">
+            {% else %}
+                <img class="image_question rounded-2xl w-full" src="{{ vich_uploader_asset(question, 'imageFileQuestion') }}">        
+            {% endif %}
+            
+            <p class="thematic_name px-1.5 rounded-full">{{ question.thematicId.name }}</p>
+        </div>
+        <h1 class="font-['sourceserif'] font-semibold text-grey text-xl">{{ question.title }}</h1>
+        {% include "components/createdByAndNbAnswerLittleFont.html.twig" %}
+    </a>
 </div>
